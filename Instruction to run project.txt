@@ -1,0 +1,13 @@
+To run the project in terminal:
+
+python app.py
+
+
+To capture real time image:
+
+python train.py
+
+
+To Detect in real time:
+
+python face_reg.py

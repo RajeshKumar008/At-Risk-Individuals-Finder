@@ -1,0 +1,111 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.navbar {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.jumbotron {
+    background-color: #007bff;
+    color: white;
+    padding: 2em 1em;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.jumbotron .display-4 {
+    font-weight: bold;
+}
+
+.btn-lg {
+    padding: 0.75em 1.5em;
+    font-size: 1.25em;
+    transition: transform 0.2s ease;
+}
+
+.btn-lg:hover {
+    transform: scale(1.05);
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.list-group-item:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+form {
+    margin-top: 1em;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.form-control, .form-control-file {
+    border-radius: 4px;
+    
+}
+
+button[type="submit"] {
+    margin-top: 1em;
+    padding: 0.75em 1.5em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+}
+
+.fade-in {
+    animation: fadeInAnimation ease 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .jumbotron {
+        padding: 1.5em 0.5em;
+    }
+    
+    .display-4 {
+        font-size: 1.8em;
+    }
+
+    .btn-lg {
+        font-size: 1em;
+    }
+}

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>At-Risk individuals Finder</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Import a clean futuristic font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+/* Global Styles */
+body {
+    background-color: #0f172a; /* Deep navy blue for a professional cyber look */
+    color: #e2e8f0; /* Soft light gray for readability */
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    padding: 1.5rem;
+    background: #1e293b; /* Darker blue for contrast */
+    color: #38bdf8; /* Subtle neon blue for a tech feel */
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0px 4px 12px rgba(56, 189, 248, 0.15);
+    font-weight: 600;
+}
+
+.header h1 {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+/* Buttons */
+.btn-custom {
+    margin: 0.8rem 0.5rem;
+    width: 160px;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 6px;
+    background: #0ea5e9; /* Professional blue */
+    color: #ffffff;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-custom:hover {
+    background: #0284c7;
+    box-shadow: 0px 0px 10px rgba(14, 165, 233, 0.3);
+}
+
+/* Cards */
+.card, .chart-card, .news-card {
+    border: 1px solid rgba(226, 232, 240, 0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: #1e293b;
+    box-shadow: 0px 4px 10px rgba(226, 232, 240, 0.1);
+    margin-bottom: 1.5rem;
+}
+
+/* Census Stats */
+.census-stat {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #38bdf8; /* Consistent neon blue for highlights */
+}
+
+/* Layout */
+.census-container, .chart-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Icons */
+.icon {
+    font-size: 1.8rem;
+    color: #38bdf8; 
+    margin-right: 8px;
+}
+
+/* News Card */
+.news-card img {
+    width: 100%;
+    border-radius: 6px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.news-card img:hover {
+    transform: scale(1.03);
+}
+
+.news-card h4 {
+    margin-top: 0.8rem;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+/* Charts */
+.chart-card {
+    background-color: #1e293b;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+/* Subtle Glow Effect */
+.glow {
+    text-shadow: 0px 0px 8px rgba(56, 189, 248, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        padding: 1.2rem;
+    }
+    
+    .header h1 {
+        font-size: 1.6rem;
+    }
+
+    .btn-custom {
+        width: 100%;
+        font-size: 0.95rem;
+    }
+
+    .census-stat {
+        font-size: 1.4rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header text-center">
+            <h1><i class="fas fa-search icon"></i>At-Risk individuals Finder</h1>
+            <p>Your trusted platform for reporting and finding missing individuals</p>
+        </div>
+
+        <div class="text-center">
+            <a href="{{ url_for('file_complaint_route') }}" class="btn btn-primary btn-custom">File a Complaint</a>
+            <a href="{{ url_for('complaint_list') }}" class="btn btn-secondary btn-custom">View Complaints</a>
+            <button id="start-surveillance" class="btn btn-danger btn-custom">Start Surveillance</button>
+        </div>
+
+        <div class="census-container">
+            <div class="card col-md-5 text-center">
+                <h3><i class="fas fa-user-slash icon text-primary"></i> Live Missing Persons</h3>
+                <div class="census-stat text-primary">152</div>
+                <p>Active cases reported this year</p>
+            </div>
+            <div class="card col-md-5 text-center">
+                <h3><i class="fas fa-user-check icon text-success"></i> Resolved Cases</h3>
+                <div class="census-stat text-success">89</div>
+                <p>Cases successfully resolved and persons found</p>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-card col-md-12">
+                <h3 class="text-center"><i class="fas fa-chart-line icon text-info"></i>Monthly Missing Cases Trend</h3>
+                <canvas id="missingTrendChart" height="100"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3><i class="fas fa-newspaper icon text-warning"></i>Recent News</h3>
+            </div>
+            <div class="col-md-6 news-card">
+                <img src="https://give.do/blog/wp-content/uploads/2024/03/NGO-for-children-2-1.jpg" alt="News Image"> <!-- Replace with relevant news image URL -->
+                <h4>Local Community Rallies to Find Missing Child</h4>
+                <p>A local community has come together to help find a missing child, organizing search parties and spreading awareness.</p>
+            </div>
+            <div class="col-md-6 news-card">
+                <img src="https://give.do/blog/wp-content/uploads/2025/02/trafficking-NGO.png" alt="News Image"> <!-- Replace with relevant news image URL -->
+                <h4>Innovative Surveillance Tech Assists in Locating Missing Persons</h4>
+                <p>New advancements in surveillance and facial recognition technology are being leveraged to track and locate missing persons.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#start-surveillance').click(function() {
+                $.post('/start-surveillance', function(data) {
+                    alert(data.status);
+                });
+                window.open('/surveillance', '_blank', 'width=800,height=600'); 
+            });
+
+            const ctx = document.getElementById('missingTrendChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Missing Cases',
+                        data: [10, 12, 8, 15, 14, 16, 18, 10, 12, 8, 15, 14],
+                        borderColor: '#007bff',
+                        backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Monthly Missing Cases in 2024'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Cases'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Month'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

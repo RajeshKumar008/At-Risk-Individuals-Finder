@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missing Person Finder</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            background: #f9fafb;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            background-color: #004c6d;
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: #f9fafb !important;
+            font-weight: bold;
+        }
+
+        .jumbotron {
+            background: url('https://i.pinimg.com/originals/33/8e/de/338ede5f9f949b9c4cc6c1c0c15c6a00.jpg') center/cover no-repeat;
+            color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 2s;
+        }
+
+        /* Button Styles */
+        .btn-primary,
+        .btn-secondary,
+        .btn-warning {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover,
+        .btn-secondary:hover,
+        .btn-warning:hover {
+            transform: scale(1.05);
+        }
+
+        /* Card Styles */
+        .card {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: none;
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #004c6d;
+            color: #f9fafb;
+            padding: 10px 0;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Image & Icon Styles */
+        .feature-icon {
+            font-size: 1.8rem;
+            color: #004c6d;
+        }
+
+        /* Responsive Spacing */
+        .mt-4,
+        .my-4 {
+            margin-top: 2.5rem !important;
+        }
+
+        .mb-4 {
+            margin-bottom: 2.5rem !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Missing Person Finder</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/complaint">File a Complaint</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/found">Found a Person</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/surveillance">Surveillance Mode</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/complaints">View Complaints</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="container mt-4">
+        <div class="jumbotron text-center text-white">
+            <h1 class="display-4">Welcome to the Missing Person Finder</h1>
+            <p class="lead">Locating missing persons through cutting-edge technology.</p>
+            <a class="btn btn-primary btn-lg mt-2" href="/complaint" role="button">File a Complaint</a>
+            <a class="btn btn-warning btn-lg mt-2" href="/found" role="button">Found a Person</a>
+            <a class="btn btn-secondary btn-lg mt-2" href="/surveillance" role="button">Surveillance Mode</a>
+        </div>
+
+        <!-- Information Cards -->
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-newspaper feature-icon"></i>
+                        <h3 class="card-title mt-3">Recent Missing Person News</h3>
+                        <p class="card-text">Stay informed with the latest news and updates on missing persons.</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">New missing person reported in the downtown area.</li>
+                            <li class="list-group-item">Authorities urge citizens to report sightings.</li>
+                            <li class="list-group-item">Community rally to raise awareness.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="fas fa-chart-bar feature-icon"></i>
+                        <h3 class="card-title mt-3">Missing Person Census Data</h3>
+                        <p class="card-text">View real-time statistics and data on missing persons in the area.</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Total Missing Persons: 150</li>
+                            <li class="list-group-item">Last Seen in the Last 30 Days: 50</li>
+                            <li class="list-group-item">Resolved Cases: 100</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <p>&copy; 2024 Missing Person Finder | Created by FHJ</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surveillance Mode</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <a class="navbar-brand" href="#">Missing Person Finder</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/complaint">File a Complaint</a></li>
+                <li class="nav-item"><a class="nav-link" href="/found">Found a Person</a></li>
+                <li class="nav-item"><a class="nav-link" href="/complaints">View Complaints</a></li>
+                <li class="nav-item active"><a class="nav-link" href="/surveillance">Surveillance Mode</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4 text-center">
+        <h1>Surveillance Mode</h1>
+        <p>Real-time surveillance using the camera is active. The system will detect and recognize faces.</p>
+        <img src="{{ url_for('video_feed') }}" width="100%" alt="Video Feed">
+        <a class="btn btn-primary btn-lg mt-3" href="/">Back to Home</a>
+    </div>
+
+    <footer class="text-center mt-4 mb-4">
+        <p>&copy; 2024 Missing Person Finder. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
